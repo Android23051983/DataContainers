@@ -132,7 +132,8 @@ public:
 		{
 			Helping->pNext = Temp->pNext;
 		}
-		free(Temp); // Deallocate memory block (void free (void* ptr);). Ссылка: https://cplusplus.com/reference/cstdlib/free/
+		//free(Temp); // Deallocate memory block (void free (void* ptr);). Ссылка: https://cplusplus.com/reference/cstdlib/free/
+		delete(Temp); //Deallocate storage space. Ссылка: https://cplusplus.com/reference/new/operator%20delete/
 		size--;
 	}
 
@@ -146,8 +147,8 @@ public:
 		//}
 		for(Element* Temp = Head; Temp; Temp=Temp->pNext)
 			cout << Temp << "\t" << Temp->Data << "\t" << Temp->pNext << endl;
-		cout << "Количество элементов спискак" << Element::count << endl;
-		cout << "Точный расчёт" << size << endl;
+		cout << "Количество элементов спискак " << Element::count << endl;
+		cout << "Точный расчёт " << size << endl;
 	}
 };
 //#define BASE_CHECK
