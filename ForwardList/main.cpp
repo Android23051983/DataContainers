@@ -114,9 +114,21 @@ public:
 	}
 	void erase(int Index)
 	{
-		Element* Temp = Head;
-		for (int i = 0; i < Index-1; i++)Temp = Temp->pNext;
-		Temp->pNext = Temp->pNext->pNext;
+		Element *Temp = Head, *Helping = Head;
+		for (int i = 0; i < Index; i++) 
+		{
+			Helping = Temp;
+			Temp = Temp->pNext;
+		}
+		if (Temp == Head)
+		{
+			Head = Temp->pNext;
+		}
+		else
+		{
+			Helping->pNext = Temp->pNext;
+		}
+		free(Temp); // Deallocate memory block (void free (void* ptr);). —сылка: https://cplusplus.com/reference/cstdlib/free/
 		size--;
 	}
 
@@ -192,8 +204,8 @@ void main()
 #endif // RANGE_BASE_FOR_ARRAY
 	ForwardList list = { 3,5,8,13,21 };
 	list.print();
-	list.insert(0, 0);
-	list.print();
-	//list.erase(0);
+	//list.insert(0, 0);
 	//list.print();
+	list.erase(0);
+	list.print();
 }
