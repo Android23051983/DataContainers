@@ -103,6 +103,10 @@ public:
 		{
 			push_front(Data);
 		}
+		else if (Temp->pNext == nullptr)
+		{
+			push_back(Data);
+		}
 		else
 		{
 			for (int i = 0; i <= Index - 1; i++)Temp = Temp->pNext;
