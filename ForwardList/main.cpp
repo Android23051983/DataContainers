@@ -99,11 +99,25 @@ public:
 	{
 		//Element* New = new Element(Data);
 		Element* Temp = Head;
-		for (int i = 0; i < Index - 1; i++)Temp = Temp->pNext;
-		/*New->pNext = Temp->pNext;
-		Temp->pNext = New;*/
-		Temp->pNext = new Element(Data, Temp->pNext);
-		size++;
+		if (Index ==0)
+		{
+			push_front(Data);
+		}
+		else
+		{
+			for (int i = 0; i <= Index - 1; i++)Temp = Temp->pNext;
+			/*New->pNext = Temp->pNext;
+			Temp->pNext = New;*/
+			Temp->pNext = new Element(Data, Temp->pNext);
+			size++;
+		}
+	}
+	void erase(int Index)
+	{
+		Element* Temp = Head;
+		for (int i = 0; i < Index-1; i++)Temp = Temp->pNext;
+		Temp->pNext = Temp->pNext->pNext;
+		size--;
 	}
 
 	void print()const
@@ -178,4 +192,8 @@ void main()
 #endif // RANGE_BASE_FOR_ARRAY
 	ForwardList list = { 3,5,8,13,21 };
 	list.print();
+	list.insert(0, 0);
+	list.print();
+	//list.erase(0);
+	//list.print();
 }
