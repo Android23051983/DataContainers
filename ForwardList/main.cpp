@@ -132,10 +132,12 @@ public:
 		{
 			Helping->pNext = Temp->pNext;
 		}
-		//free(Temp); // Deallocate memory block (void free (void* ptr);). Ссылка: https://cplusplus.com/reference/cstdlib/free/
+		//free(Temp); // Deallocate memory block. Ссылка: https://cplusplus.com/reference/cstdlib/free/
 		delete(Temp); //Deallocate storage space. Ссылка: https://cplusplus.com/reference/new/operator%20delete/
 		size--;
 	}
+
+	
 
 	void print()const
 	{
@@ -147,10 +149,15 @@ public:
 		//}
 		for(Element* Temp = Head; Temp; Temp=Temp->pNext)
 			cout << Temp << "\t" << Temp->Data << "\t" << Temp->pNext << endl;
-		cout << "Количество элементов спискак " << Element::count << endl;
+		cout << "Количество элементов в списках " << Element::count << endl;
 		cout << "Точный расчёт " << size << endl;
 	}
 };
+
+ForwardList operator+(const Element& left, const Element& right)
+{
+
+}
 //#define BASE_CHECK
 //#define RANGE_BASE_FOR_ARRAY
 void main()
@@ -207,10 +214,15 @@ void main()
 	}
 	cout << endl;
 #endif // RANGE_BASE_FOR_ARRAY
-	ForwardList list = { 3,5,8,13,21 };
-	list.print();
+	ForwardList list1 = { 3,5,8,13,21 };
+	ForwardList list2 = { 34,55,89 };
+	cout << "list1" << endl;
+	list1.print();
+	cout << "list2" << endl;
+	list2.print();
 	//list.insert(0, 0);
 	//list.print();
-	list.erase(0);
-	list.print();
+	list1.erase(0);
+	list1.print();
+	//ForwardList list3 = list1 + list2;
 }
