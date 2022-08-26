@@ -242,7 +242,7 @@ void main()
 
 #endif // ENDL_TEST_WORK
 	/*ForwardList list1 = { 3,5,8,13,21 };
-	for (int i : )
+	for (int i : list1)
 	{
 		cout << i << "\t";
 	}
