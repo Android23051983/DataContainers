@@ -1,4 +1,5 @@
 #include<iostream>
+#include<forward_list>
 using namespace std;
 using std::cin;
 using std::cout;
@@ -33,6 +34,7 @@ public:
 	ForwardList()
 	{
 		Head = nullptr; //Если список пуст, то его Голова указывает на 0
+		size = 0;
 		cout << "LConstructor:\t" << this << endl;
 	}
 
@@ -153,12 +155,13 @@ public:
 	}
 };
 
-//ForwardList operator+(const Element& left, const Element& right)
+//ForwardList operator+(const ForwardList& left, const ForwardList& right)
 //{
-//	ForwardList result;
-//	result
+//	ForwardList list;
+//	list = list.merge(list)
+//	
 //}
-//#define BASE_CHECK
+#define BASE_CHECK
 //#define RANGE_BASE_FOR_ARRAY
 void main()
 {
@@ -230,5 +233,6 @@ void main()
 	cout << "list1" << endl;
 	list1.print();
 	//ForwardList list3 = list1 + list2;
-
+	list1.merge(list2);
+	
 }	
