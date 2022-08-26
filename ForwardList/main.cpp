@@ -1,5 +1,5 @@
 #include<iostream>
-#include<forward_list>
+
 using namespace std;
 using std::cin;
 using std::cout;
@@ -233,6 +233,6 @@ void main()
 	cout << "list1" << endl;
 	list1.print();
 	//ForwardList list3 = list1 + list2;
-	list1.merge(list2);
+
 	
 }	
