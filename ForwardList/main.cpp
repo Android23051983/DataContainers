@@ -150,8 +150,8 @@ public:
 		//}
 		for(Element* Temp = Head; Temp; Temp=Temp->pNext)
 			cout << Temp << "\t" << Temp->Data << "\t" << Temp->pNext << endl;
-		cout << "Количество элементов в списках " << Element::count << endl;
-		cout << "Точный расчёт " << size << endl;
+		cout << "Общее количество элементов в списках: " << Element::count << endl;
+		cout << "Количество элементов списка: " << size << endl;
 	}
 };
 
