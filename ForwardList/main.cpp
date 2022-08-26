@@ -103,10 +103,6 @@ public:
 		{
 			push_front(Data);
 		}
-		else if (Temp->pNext == nullptr)
-		{
-			push_back(Data);
-		}
 		else
 		{
 			for (int i = 0; i <= Index - 1; i++)Temp = Temp->pNext;
@@ -118,23 +114,26 @@ public:
 	}
 	void erase(int Index)
 	{
-		Element *Temp = Head, *Helping = Head;
-		for (int i = 0; i < Index; i++) 
+		Element* Temp = Head;
+		if (Index == 0)
 		{
-			Helping = Temp;
-			Temp = Temp->pNext;
-		}
-		if (Temp == Head)
-		{
-			Head = Temp->pNext;
+			pop_front();
 		}
 		else
 		{
-			Helping->pNext = Temp->pNext;
+			for (int i = 0; i < Index - 1; i++)
+			{
+
+				Temp = Temp->pNext;
+
+			}
+				Element *Erased = Temp->pNext;
+				Temp->pNext = Temp->pNext->pNext;
+				delete Erased;
+				size--;
 		}
-		//free(Temp); // Deallocate memory block. Ссылка: https://cplusplus.com/reference/cstdlib/free/
-		delete(Temp); //Deallocate storage space. Ссылка: https://cplusplus.com/reference/new/operator%20delete/
-		size--;
+	
+	
 	}
 
 	
@@ -154,10 +153,11 @@ public:
 	}
 };
 
-ForwardList operator+(const Element& left, const Element& right)
-{
-
-}
+//ForwardList operator+(const Element& left, const Element& right)
+//{
+//	ForwardList result;
+//	result
+//}
 //#define BASE_CHECK
 //#define RANGE_BASE_FOR_ARRAY
 void main()
@@ -214,15 +214,21 @@ void main()
 	}
 	cout << endl;
 #endif // RANGE_BASE_FOR_ARRAY
+	cout << "Создание списков" << endl;
 	ForwardList list1 = { 3,5,8,13,21 };
 	ForwardList list2 = { 34,55,89 };
 	cout << "list1" << endl;
 	list1.print();
 	cout << "list2" << endl;
 	list2.print();
-	//list.insert(0, 0);
-	//list.print();
-	list1.erase(0);
+	cout << "Вставка элемета списка" << endl;
+	list1.insert(0, 4);
+	cout << "list1" << endl;
+	list1.print();
+	cout << "Удаление элемета списка" << endl;
+	list1.erase(4);
+	cout << "list1" << endl;
 	list1.print();
 	//ForwardList list3 = list1 + list2;
-}
+
+}	
