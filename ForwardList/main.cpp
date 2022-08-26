@@ -161,8 +161,9 @@ public:
 //	list = list.merge(list)
 //	
 //}
-#define BASE_CHECK
+//#define BASE_CHECK
 //#define RANGE_BASE_FOR_ARRAY
+//#define ENDL_TEST_WORK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -217,22 +218,36 @@ void main()
 	}
 	cout << endl;
 #endif // RANGE_BASE_FOR_ARRAY
+#ifdef ENDL_TEST_WORK
 	cout << "Создание списков" << endl;
 	ForwardList list1 = { 3,5,8,13,21 };
 	ForwardList list2 = { 34,55,89 };
+	cout << endl;
 	cout << "list1" << endl;
 	list1.print();
+	cout << endl;
 	cout << "list2" << endl;
 	list2.print();
+	cout << endl;
 	cout << "Вставка элемета списка" << endl;
 	list1.insert(0, 4);
 	cout << "list1" << endl;
 	list1.print();
+	cout << endl;
 	cout << "Удаление элемета списка" << endl;
 	list1.erase(4);
 	cout << "list1" << endl;
 	list1.print();
-	//ForwardList list3 = list1 + list2;
+	//ForwardList list3 = list1 + list2;  
+
+#endif // ENDL_TEST_WORK
+	/*ForwardList list1 = { 3,5,8,13,21 };
+	for (int i : )
+	{
+		cout << i << "\t";
+	}
+	cout << endl;*/
+
 
 	
 }	
