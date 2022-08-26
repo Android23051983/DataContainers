@@ -11,6 +11,15 @@ class Element
 	Element* pNext;
 	static int count;
 public:
+	int get_Data()const
+	{
+		return Data;
+	}
+	Element* get_pNext()const
+	{
+		return pNext;
+	}
+
 	Element(int Data, Element* pNext = nullptr) :Data(Data), pNext(pNext)
 	{
 		count++;
@@ -31,6 +40,10 @@ class ForwardList
 	Element* Head;
 	unsigned int size;
 public:
+	Element* get_Head()const
+	{
+		return Head;
+	}
 	ForwardList()
 	{
 		Head = nullptr; //Если список пуст, то его Голова указывает на 0
@@ -155,15 +168,18 @@ public:
 	}
 };
 
-//ForwardList operator+(const ForwardList& left, const ForwardList& right)
-//{
-//	ForwardList list;
-//	list = list.merge(list)
-//	
-//}
+ForwardList operator+(const ForwardList& left, const ForwardList& right)
+{
+	ForwardList result = left;	
+	for (Element* Temp = right.get_Head(); Temp; Temp = Temp->get_pNext())
+	{
+		result.push_back(Temp->get_Data());
+	}
+	return result;
+}
 //#define BASE_CHECK
 //#define RANGE_BASE_FOR_ARRAY
-//#define ENDL_TEST_WORK
+#define ENDL_TEST_WORK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -238,16 +254,9 @@ void main()
 	list1.erase(4);
 	cout << "list1" << endl;
 	list1.print();
-	//ForwardList list3 = list1 + list2;  
+	//ForwardList list3 = list1 + list2;
+	//list3.print();
 
 #endif // ENDL_TEST_WORK
-	/*ForwardList list1 = { 3,5,8,13,21 };
-	for (int i : list1)
-	{
-		cout << i << "\t";
-	}
-	cout << endl;*/
 
-
-	
 }	
