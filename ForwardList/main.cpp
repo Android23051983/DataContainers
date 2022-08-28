@@ -30,16 +30,62 @@ public:
 		count--;
 		cout << "Edestructor:\t" << this << endl;
 	}
+
+	
+
 	friend class ForwardList;
+	friend class Iterator;
 
 };
 int Element::count = 0;
+
+class Iterator
+{
+	Element* Temp;
+public:
+	Iterator(Element* Temp = nullptr) : Temp(Temp)
+	{
+		cout << "ItC:\t" << this << endl;
+	}
+	~Iterator()
+	{
+		cout << "Itd:\t" << this << endl;
+
+	}
+	// Operators:
+	Iterator & operator++()	//Prefix increment
+	{
+		Temp = Temp->pNext;
+		return *this;
+	}
+	bool operator==(const Iterator& other)const
+	{
+		return this->Temp == other.Temp;
+	}
+	bool operator!=(const Iterator& other)const
+	{
+		return this->Temp != other.Temp;
+	}
+	int& operator*()
+	{
+		return Temp->Data;
+	}
+};
 
 class ForwardList
 {
 	Element* Head;
 	unsigned int size;
 public:
+	Iterator begin()
+	{
+		return Head;
+	}
+
+	Iterator end()
+	{
+		return nullptr;
+	}
 	Element* get_Head()const
 	{
 		return Head;
@@ -60,11 +106,42 @@ public:
 		
 		}
 	}
+	ForwardList(const ForwardList& other) :ForwardList()
+	{
+		*this = other;
+	}
 
+	ForwardList(ForwardList&& other) : ForwardList()
+	{
+		*this = std::move(other);
+	}
 	~ForwardList()
 	{
 		while (Head)pop_front();
 		cout << "LDestructor:\t" << this << endl;
+	}
+
+	//operators
+	
+	ForwardList& operator=(const ForwardList& other)
+	{
+		if (this == &other)return*this;
+		while (Head)pop_front();
+		for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
+			push_back(Temp->Data);
+		return *this;
+
+	}
+	ForwardList& operator=(ForwardList&& other)
+	{
+		if (this == &other)return *this;
+		while (Head)pop_front();
+		this->Head = other.Head;
+		this->size = other.size;
+
+		other.Head = nullptr;
+		other.size = 0;
+		return *this;
 	}
 
 	// Adding elements:
@@ -179,7 +256,7 @@ ForwardList operator+(const ForwardList& left, const ForwardList& right)
 }
 //#define BASE_CHECK
 //#define RANGE_BASE_FOR_ARRAY
-#define ENDL_TEST_WORK
+//#define ENDL_TEST_WORK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -238,13 +315,14 @@ void main()
 	cout << "Создание списков" << endl;
 	ForwardList list1 = { 3,5,8,13,21 };
 	ForwardList list2 = { 34,55,89 };
+	
 	/*cout << endl;
-	cout << "list1" << endl;
+	cout << "list1" << endl;*/
 	list1.print();
 	cout << endl;
 	cout << "list2" << endl;
 	list2.print();
-	cout << endl;
+	/*cout << endl;
 	cout << "Вставка элемета списка" << endl;
 	list1.insert(0, 4);
 	cout << "list1" << endl;
@@ -258,5 +336,11 @@ void main()
 	list3.print();
 
 #endif // ENDL_TEST_WORK
+ForwardList list = { 3, 5, 8, 13, 21 };
+	for (int i : list)
+	{
+		cout << i << "\t";
+	}
+	cout << endl;
 
 }	
