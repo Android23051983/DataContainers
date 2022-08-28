@@ -114,7 +114,12 @@ public:
 	{
 		//Element* New = new Element(Data);
 		Element* Temp = Head;
-		if (Index ==0)
+		if (Index > Head->count)
+		{
+			cout << "Выход за пределы списка." << endl;
+			return;
+		}
+		if (Index ==0 || Head == nullptr)
 		{
 			push_front(Data);
 		}
@@ -151,8 +156,6 @@ public:
 	
 	}
 
-	
-
 	void print()const
 	{
 		//Element* Temp = Head; //Temp это итератор
@@ -171,10 +174,7 @@ public:
 ForwardList operator+(const ForwardList& left, const ForwardList& right)
 {
 	ForwardList result = left;	
-	for (Element* Temp = right.get_Head(); Temp; Temp = Temp->get_pNext())
-	{
-		result.push_back(Temp->get_Data());
-	}
+	for (Element* Temp = right.get_Head(); Temp; Temp = Temp->get_pNext())result.push_back(Temp->get_Data());
 	return result;
 }
 //#define BASE_CHECK
@@ -238,7 +238,7 @@ void main()
 	cout << "Создание списков" << endl;
 	ForwardList list1 = { 3,5,8,13,21 };
 	ForwardList list2 = { 34,55,89 };
-	cout << endl;
+	/*cout << endl;
 	cout << "list1" << endl;
 	list1.print();
 	cout << endl;
@@ -253,9 +253,9 @@ void main()
 	cout << "Удаление элемета списка" << endl;
 	list1.erase(4);
 	cout << "list1" << endl;
-	list1.print();
-	//ForwardList list3 = list1 + list2;
-	//list3.print();
+	list1.print();*/
+	ForwardList list3 = list1 + list2;
+	list3.print();
 
 #endif // ENDL_TEST_WORK
 
