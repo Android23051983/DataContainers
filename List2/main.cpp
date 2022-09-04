@@ -433,10 +433,8 @@ void main()
 
 #endif // OPERATOR_PLUS_CHECK
 	List<int> i_list = { 3,5,8,13,21 };
-	for (int i : i_list)cout <<i << tab	
+	for (int i : i_list)cout << i << tab; cout << endl;
 		
-	List<int> i_list = { 3,5,8,13,21 };
-	for (int i : i_list)cout <<i << tab
-
-
+	List<double> d_list = { 2.5,3.14,5.3, 8.4 };
+	for (double i : d_list)cout << i << tab; cout << endl;
 }
