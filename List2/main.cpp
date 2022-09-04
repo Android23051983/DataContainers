@@ -118,11 +118,11 @@ public:
 			return old;
 		}
 
-		bool operator==(const ReverseIterator& other)
+		bool operator==(const ReverseIterator& other)const
 		{
 			return this->Temp == other.Temp;
 		}
-		bool operator!=(const ReverseIterator& other)
+		bool operator!=(const ReverseIterator& other)const
 		{
 			return this->Temp != other.Temp;
 		}
@@ -137,11 +137,11 @@ public:
 		}
 
 	};
-	Iterator begin()
+	Iterator begin()const
 	{
 		return Head;
 	}
-	Iterator end()
+	Iterator end()const
 	{
 		return nullptr;
 	}
@@ -165,10 +165,11 @@ public:
 	List(const std::initializer_list<int>& il) :List()
 	{
 		cout << typeid(il.begin()).name() << endl;;
-		for (int const* it = il.begin(); it != il.end(); it++)
+		/*for (int const* it = il.begin(); it != il.end(); ++it)
 		{
 			push_back(*it);
-		}
+		}*/
+		for (int i : il)push_back(i);
 	}
 
 	List(const List& other) :List()
@@ -205,20 +206,22 @@ public:
 			return;
 		
 		}
-		Element* New = new Element(Data);
+		/*Element* New = new Element(Data);
 		New->pNext = Head;
 		Head->pPrev = New;
-		Head = New;
+		Head = New;*/
+		Head = Head->pPrev = new Element(Data, Head);
 		size++;
 	}
 
 	void push_back(int Data)
 	{
 		if (Head == nullptr && Tail == nullptr)return push_front(Data);
-		Element* New = new Element(Data);
+		/*Element* New = new Element(Data);
 		New->pPrev = Tail;
 		Tail->pNext = New;
-		Tail = New;
+		Tail = New;*/
+		Tail = Tail->pNext = new Element(Data, nullptr, Tail);
 		size++;
 
 	}
@@ -297,6 +300,7 @@ public:
 		New->pPrev = Temp->pPrev;
 		Temp->pPrev->pNext = New;
 		Temp->pPrev = New;
+
 		size++;
 	}
 	//Methods:
@@ -312,7 +316,18 @@ public:
 		cout << Temp->pPrev << tab << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
 	}
 };
+List operator+(const List& left, const List& right)
+{
+	List cat = left;
+	for (List::Iterator it = right.begin(); it != right.end(); ++it)
+	{
+		cat.push_back(*it);
+		*it *= 10;
+	}
+	return cat;
+}
 //#define BASE_CHECK
+//#define ITERATORS_CHECK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -340,18 +355,26 @@ void main()
 	list.print();
 	list.reverse_print();
 #endif // BASE_CHECK
+#ifdef ITERATORS_CHECK
 	List list = { 3,5,8,13,21 };
 	list.print();
 	List list1;
 	list1 = list;
 	for (int i : list1)cout << i << tab; cout << endl;
 
-	for (List::ReverseIterator reviter = list.rbegin(); reviter != list.rend(); reviter++)
+	for (List::ReverseIterator reviter = list.rbegin(); reviter != list.rend(); ++reviter)
 	{
 		cout << *reviter << tab;
 		cout << endl;
 	}
 	cout << endl;
+#endif // ITERATORS_CHECK
+	List list1 = { 3,5,8,12,21 };
+	List list2 = { 34,55,89 };
+	List list3 = list1 + list2;
+	list3.print();
+	list2.print();
+	list1.print();
 
 
 }
